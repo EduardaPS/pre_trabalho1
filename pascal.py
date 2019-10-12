@@ -2,6 +2,13 @@ from helpers import coef_binomial, bernoulli, monte_carlo
 from matplotlib import pyplot as plt
 
 def media_variancia_pmf(k: int, p: float):
+    """
+    faz o cálculo esperado da média, variância e pmf da distribuição de pascal
+
+    :param k: número de sucessos
+    :param p: probabilidade de sucesso
+    """
+
     print('-' * 70)
     print(f'A média teórica da distribuição de pascal com k={k} e p={p} é de {k/p}')
     print(f'A variância teórica da distribuição de pascal com k={k} e p={p} é de {k*(1-p)/p**2}')
@@ -14,6 +21,14 @@ def media_variancia_pmf(k: int, p: float):
 
 
 def rand_pascal(k: int, p: int):
+    """
+      retorna o valor da VA de acordo com a distribuição de pascal
+
+      :param k: número de sucessos
+      :param p: probabilidade de sucesso
+      :return: número de jogadas necessárias para alcançar k sucessos
+    """
+
     if p < 0 or p > 1:
         raise ValueError('Parâmetro p numa binomial precisa ser entre 0 e 1')
     if k < 0:
@@ -23,8 +38,7 @@ def rand_pascal(k: int, p: int):
     jogadas = 0
     while sucessos != k:
         jogadas += 1
-        if bernoulli(p):
-            sucessos += 1
+        sucessos += bernoulli(p)    # pode se fazer a soma direto, porque se a bernoulli falhar o seu retorno é 0.
     return jogadas
 
 if __name__ == '__main__':
