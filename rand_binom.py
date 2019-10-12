@@ -1,14 +1,7 @@
-from math import factorial
 from matplotlib import pyplot as plt
-from random import random # Função que retorna um número uniformemente distribuído entre 0 e 1
-                          # não vou codificar isso :(
-from helpers import monte_carlo
+from helpers import monte_carlo, bernoulli, coef_binomial
 
 
-def coef_binomial(n: int, k: int) -> float:
-    return factorial(n)/(factorial(k)*factorial(n-k))
-
-#TODO: Ver com o professor se pode ser feito assim.
 def media_variancia_pmf(n: int, p: float):
     print('-'*70)
     print(f'A média teórica da distribuição binomial com n={n} e p={p} é de {n*p}')
@@ -21,12 +14,6 @@ def media_variancia_pmf(n: int, p: float):
     f.show()
 
 
-def bernoulli(p: float) -> bool:
-    if p < 0 or p > 1:
-        raise ValueError('Parâmetro p numa bernoulli precisa ser entre 0 e 1')
-
-    return random() < p
-
 def rand_binom(n: int, p: float) -> int:
     if p < 0 or p > 1:
         raise ValueError('Parâmetro p numa binomial precisa ser entre 0 e 1')
@@ -38,6 +25,7 @@ def rand_binom(n: int, p: float) -> int:
         if bernoulli(p):
             nSucessos += 1
     return nSucessos
+
 
 if __name__ == '__main__':
     media_variancia_pmf(10, 1/10)
