@@ -14,8 +14,10 @@ def media_variancia_pmf(k: int, p: float):
     print(f'A variância teórica da distribuição de pascal com k={k} e p={p} é de {k*(1-p)/p**2}')
     print('-' * 70)
     pmf = [coef_binomial(n-1, k-1)*p**k*(1-p)**(n-k) for n in range(k, k+100)]
+    for _ in range(k-1):
+        pmf.insert(0, 0)
     f = plt.figure()
-    plt.stem(range(k, k+100), pmf, use_line_collection=True)
+    plt.stem(pmf, use_line_collection=True)
     plt.title(f'PMF teórico da distribuição de pascal com k={k} e p={p}')
     f.show()
 
